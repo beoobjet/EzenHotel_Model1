@@ -17,7 +17,7 @@
 	
 	   <!--  <header id="header" onclick="location.href='/bbs/write.jsp'">
 	    	<img src="/images/header_img.png" width="100%" alt="예약이미">
-		</header> -->
+		</headessr> -->
 		
 	    <!-- header#header -->
 	    
