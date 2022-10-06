@@ -23,8 +23,8 @@ Vector<BoardBean> vList = bMgr.BoardList();
 </head>
 <body>
 	
-		<%@ include file="/common/header.jsp"%>
-	<!-- header#header -->
+	<%@ include file="/common/header.jsp"%>
+	
 
 	<div id="wrap" class="dFlex">
 
@@ -81,5 +81,12 @@ Vector<BoardBean> vList = bMgr.BoardList();
 				<% } %>
 			</div>
 		</div>
+		</main>
+		</div>
+		<div id="footerWrap">
+	
+	       <%@ include file="/common/footer.jsp"%>
+	    </div>
+		<!-- div#footerWrap -->
 </body>
 </html>

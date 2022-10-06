@@ -5,7 +5,7 @@ $(function(){
 	
 	/* 상단 메뉴 고정 끝 */
 	
-	/* 공지사항 시작 */
+	/* 공지사항 시작 
 	$("#tabBtn>button").click(function(){
 		
 		$("#tabBtn>button").css({
@@ -19,20 +19,32 @@ $(function(){
 	        });
 	
 	      let dataLink = $(this).attr("data-link");
-			
-	
-			$(".multiTB").css({
-		            "display": "none"
-		        });
+        alert("dataLink ID 속성 값 : " + ("#" + dataLink));
+        // 탭 버튼 처리 끝
 
-	        $("." + dataLink).css({
-	            "display": "inline-block"
-	        });
+        // 탭 콘텐츠 처리 시작
+        $("div.multiTB").css({
+            "display": "none"
+        });
+        $("#" + dataLink).css({
+            "display": "inline-block"
+        });
 	});
+	*/
+
 	
-	$(".btnIco").click(function(){
-		let img = $(this).children("img");
-		img.attr("src",function(index, attr){
+	$(".menu>img").click(function(){
+		let submenu = $(this).next("ul");
+		
+		/*submenu.toggleClass("hide");*/
+		 
+		if( submenu.is(":visible") ){
+			submenu.slideUp();
+		}else{
+			submenu.slideDown();           
+		} 
+		
+		$(this).attr("src",function(index, attr){
 			if(attr.match('up')){
 				return attr.replace("up","down");
 			} else{
@@ -40,9 +52,8 @@ $(function(){
 			}
 		});
 		
-		$(".reply").toggle();
-	});
-	
+});
+		
 	
 	/* 공지사항 끝 */
 	
@@ -101,8 +112,20 @@ $(function(){
 	
 	/* 상세보기 끝 */
 	
+	/* 수정 시작 */
+		$(".chaBtn").click(function(){
+			let num = $(this).attr('value');
+			
+			let param = "modify.jsp?num="+num;
+		
+			location.href=param;
+	});
+	
+	/* 수정 끝 */
+	
 	/* 삭제 시작 */
 	$(".delBtn").click(function(){
+		
 		let num = $(this).attr('value');
 		let param = "deleteProc.jsp?num="+num;
 		
@@ -111,6 +134,9 @@ $(function(){
 	});
 	
 	/* 삭제 끝 */
+	
+	
+	
 });
 
 

@@ -14,12 +14,12 @@
 	<%@ include file="/common/header.jsp"%>
 
 	<div id="hotelInfoWrap">
-		
+
 		<div class="head">
-		<h1>
-			<i class="fa-solid fa-list"></i>호텔 소개
-		</h1>
-		<hr>
+			<h1>
+				<i class="fa-solid fa-list"></i>호텔 소개
+			</h1>
+			<hr>
 		</div>
 
 		<section>
@@ -72,7 +72,7 @@
 				</div>
 			</div>
 		</section>
-		<section class="dFlex">
+		<section>
 			<div class="inner dFlex">
 				<div>
 					<img src="/images/info_image_04.jpg" alt="">
@@ -87,7 +87,7 @@
 				</div>
 			</div>
 		</section>
-
+		
 	</div>
 	<!-- div#wrap -->
 

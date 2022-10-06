@@ -21,7 +21,7 @@ public class BoardMgr {
 	PreparedStatement 	objPstmt 		= 		null;
 	Statement				 	objStmt 		= 		null;
 	ResultSet 					objRS 			= 		null;
-	String saveFolder = "D:/Bigdata_Java_220511/PHJ/silsp/p07_JSP/Project/WebContent/fileUpload";
+	String saveFolder = "D:/lhj/slisp/JSP/Project/WebContent/fileUpload";
 
 	public BoardMgr() {
 		try {
@@ -45,7 +45,7 @@ public class BoardMgr {
 
 	public int bbsBoard(HttpServletRequest req) {
 
-		String saveFolder = "D:/Bigdata_Java_220511/PHJ/silsp/p07_JSP/Project/WebContent/fileUpload";
+		String saveFolder = "D:/lhj/slisp/JSP/Project/WebContent/fileUpload";
 		
 		int maxSize = 50*1024*1024;
 		String fileEnc = "UTF-8";     
@@ -57,6 +57,7 @@ public class BoardMgr {
 		String content = "";
 		String oriFileName = "";
 		String systemFileName = "";
+		String fileName="";
 		long fileSize = 0;
 		int rtnCnt = 0;
 		
@@ -69,13 +70,15 @@ public class BoardMgr {
 			uName = objMulti.getParameter("uName");
 			subject = objMulti.getParameter("subject");
 			content = objMulti.getParameter("content");
+			fileName = objMulti.getParameter("fileName");
+//			System.out.print(fileName);
 			
-			if(objMulti.getParameter("fileName")== null){
-				
-			}else {
+			if(objMulti.getParameter("fileName") != null){
 				oriFileName = objMulti.getOriginalFileName("fileName");
 				systemFileName = objMulti.getFilesystemName("fileName");
-				fileSize = objMulti.getFile("fileName").length();					
+				fileSize = objMulti.getFile("fileName").length();		
+			}else {
+							
 			}
 			
 
@@ -175,6 +178,7 @@ public class BoardMgr {
 				vList.add(bean);
 			}	
 			
+			
 		
 			
 			
@@ -196,7 +200,7 @@ return vList;
 
 		try {
 			objConn = objPool.getConnection();
-
+			
 			
 			//////////// 게시글 삭제 시작 ///////////////
 			String sql4 = "delete from tblBoard where num=?";
@@ -216,7 +220,32 @@ return vList;
 	// 게시글 삭제 끝 
 	
 	
-	
+	// 게시글 수정 시작 
+	public int updateBoard(int num) {
+		
+		String sql5 = null;
+		int exeCnt = 0;
+		try {
+			BoardBean bean = new BoardBean();
+			objConn = objPool.getConnection();
+			
+			sql5 = "update tblBoard set subject=?, content=? where num=?";
+			objPstmt = objConn.prepareStatement(sql5);
+			objPstmt.setString(1, bean.getSubject());
+			objPstmt.setString(2, bean.getContent());
+			objPstmt.setInt(3, bean.getNum());
+			exeCnt = objPstmt.executeUpdate();
+			// exeCnt : DB에서 실제 적용된 데이터(=row, 로우)의 개수 저장됨
+
+		} catch (Exception e) {
+			System.out.println("Exception : " + e.getMessage());
+		} finally {
+			objPool.freeConnection(objConn, objPstmt);
+		}
+
+		return exeCnt;
+	}
+	// 게시글 수정 끝
 	}
 	
 

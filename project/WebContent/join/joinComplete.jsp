@@ -31,7 +31,7 @@ String takeit = request.getParameter("takeit");
 		</ul>
 		
 		<div id="contents">
-		<img class="logo" src="/images/logo.png" alt="logo">
+		<img class="logo" src="/images/logo2.png" alt="logo">
 		<br>
 		<i class="fa-solid fa-circle-check"></i>
 		<br>

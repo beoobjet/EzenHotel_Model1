@@ -10,7 +10,7 @@
 /* 헤더 영역 시작 ////////////////////////// */
 div#headerWrap>header#header {
 	width: 100%;
-	padding: 30px 5%;
+	padding: 35px 5%;
 	/* 	background-color: #ebcd44; */
 	background-color: #fcf2dc;
 	height: 130px;
@@ -67,11 +67,11 @@ div#headerWrap>header#header>div#logoBox {
 	font-family: 'Source Sans Pro', sans-serif;
 	text-align: center;
 	margin-left: 200px;
-	margin-bottom: -3px;
+	margin-bottom: -21px;
 }
 
 div#headerWrap>header#header>div#logoBox img {
-	width: 330px;
+	width: 300px;
 	cursor: pointer;
 }
 
@@ -177,4 +177,98 @@ div#footerWrap>section:nth-child(2) p:nth-child(1) {
 
 div#footerWrap>section:nth-child(2) p:nth-child(2) {
 	font-size: 12px;
+}
+
+div#floatMenu ul {
+	z-index: 999;
+	position: fixed;
+	top: 200px;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+div#floatMenu li {
+	width: 200px;
+	height: 50px;
+	background-color: #d37643;
+	text-align: right;
+	line-height: 50px;
+	border-radius: 0 3em 3em 0;
+	cursor: pointer;
+	box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.4), 5px -36px 14px -22px
+		rgba(0, 0, 0, 0);
+	margin-left: -150px;
+	padding:0 20px;
+}
+
+div#floatMenu li span, div#floatMenu li i {
+	color: #fcf2dc;
+}
+
+div#floatMenu li span {
+	display: none;
+	font-weight: bold;
+}
+
+div#floatMenu li i {
+	font-size: 23px;
+	margin-left: 20px;
+}
+
+div#floatMenu li:nth-child(1) i {
+	transform: translateY(3px);
+}
+
+div#floatMenu li:nth-child(2) i{
+	margin-right: -4px;
+	transform: translateY(1px);
+}
+
+div#floatMenu li:nth-child(3) i{
+	margin-right: -6px;
+	transform: translateY(3px);
+}
+
+div#floatMenu li:hover {
+	margin-left: -50px;
+	Transition: all 0.5s;
+}
+
+div#floatMenu li:hover> i {
+	display: none;
+}
+
+div#floatMenu li:nth-child(1):hover> span {
+	display: block;
+	margin-right: 27px;
+}
+
+div#floatMenu li:not(:nth-child(1)):hover> span {
+	display: block;
+	margin-right: 35px;
+}
+
+div#goToTop {
+	width: 40px;
+	height: 40px;
+	background-color: #d37643;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+	box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.4), 5px -36px 14px -22px
+		rgba(0, 0, 0, 0);
+
+	z-index: 999;
+	position: fixed;
+	top: 88%;
+	left: 95%;
+	display: none;
+}
+
+div#goToTop i {
+	color: #fcf2dc;
+	font-size: 24px;	
+	line-height: 40px;
 }

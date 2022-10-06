@@ -110,14 +110,13 @@ String uId_Session = (String)session.getAttribute("uId_Session");
 		</main>
 		<!--  main#main  -->
 
-
-		<!--  푸터템플릿 시작 -->
-
-		<!--  푸터템플릿 끝 -->
-
 	</div>
 	<!-- div#wrap -->
-
+	<div id="footerWrap">
+	
+	       <%@ include file="/common/footer.jsp"%>
+	    </div>
+		<!-- div#footerWrap -->
 </body>
 
 </html>

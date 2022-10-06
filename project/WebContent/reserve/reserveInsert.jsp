@@ -52,7 +52,7 @@ List<ReserveRoomBean> objHRInfo = null;
    			} else {
    			%>
    			
-   			<form id="changeRoomInfo" method="get">
+   			<form id="changeRoomInfo" method="post">
    			
 				<table id="resvHOrRDet">
 		   			<caption>회원정보 <b><%= uId_Session %></b> 님</caption>
@@ -109,7 +109,9 @@ List<ReserveRoomBean> objHRInfo = null;
 											<p class="rPeople">객실정원 : <span><b><%= objRIB.getrPeople() %></b></span> 명</p>
 											<input type="hidden" name="resev_people" value="<%= objRIB.getrPeople() %>">
 										</label> 
-										<button id="<%= objRIB.getrCode() %>Img">객실 사진보기</button>
+										<button type="button" id="<%= objRIB.getrCode() %>_Btn" class="imgViewBtn">객실 사진보기</button>
+										<input type="hidden" class="roomImg" value="<%= objRIB.getrCode() %>">
+										<input type="hidden" class="roomImgName" value="<%= objRIB.getrName() %>">
 									</div>
 								<%
 									if(divLine == 4){
@@ -176,6 +178,32 @@ List<ReserveRoomBean> objHRInfo = null;
         
     </div>
     <!-- div#wrap -->
+    
+    
+    
+    
+    <!-- 모달 레이어 팝업 시작 -->
+    <div id="modalBG">
+    
+    	<!-- 불투명 검정 배경 시작 -->
+    	<div id="modalLayer">
+    		<!-- 레이업 팝업 내용 시작 -->
+    		<div id="modalLayerImg" >
+    			<div id="imgArea" class="dFlex">
+    			
+    			</div>
+                <!-- <img src="" alt="모달레이어 이미지"> -->
+                <h3 id="artSubject"> </h3>
+                <p id="artistInfo"> </p>
+    		</div>
+    		
+    		<span id="modalCloseBtn">&times;</span>
+    		
+    	</div>
+    	
+    </div>
+    
+    
 
 </body>
 </html>

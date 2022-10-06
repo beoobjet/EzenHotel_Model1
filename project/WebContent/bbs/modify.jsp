@@ -1,90 +1,109 @@
+<%@ page import="pack_BBS.BoardBean" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="pack_BBS.*"%>
-<%
+	pageEncoding="UTF-8" import="pack_BBS.*"%>
+<jsp:useBean id="bMgr" class="pack_BBS.BoardMgr" scope="page" />
+
+<% 
+
 request.setCharacterEncoding("UTF-8");
-int num = Integer.parseInt(request.getParameter("num"));
+String uId_Session = (String)session.getAttribute("s_Key"); 
 
-String uId_Session = (String)session.getAttribute("uId_Session"); 
+try{
+	int num = Integer.parseInt(request.getParameter("num"));
+	int exeCnt = bMgr.updateBoard(num);
+	
+} catch(Exception e){
+}
 
-BoardBean bean = (BoardBean)session.getAttribute("bean");
-String txtType = bean.getTxtType();
-String subject = bean.getSubject();
-String uName = bean.getuName();
-String content = bean.getContent();
-String systemFileName = bean.getSystemFileName();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>문의글 수정</title>
+<link rel="shortcut icon" href="#">
+<link rel="stylesheet" href="/style/style_bbs.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/script/script.js"></script>
 </head>
 <body>
-	<header id="header" onclick="location.href='/bbs/write.jsp'">
-		<img src="/images/header_img.png" width="100%" alt="예약이미지">
-	</header>
-	<!-- header#header -->
+		<%@ include file="/common/header.jsp"%>
 
 	<div id="wrap" class="dFlex">
 		<div id="Menu">
 			<h2>고객센터</h2>
 			<hr>
-			<span onclick="location.href='/bbs/list.jsp'">Q&A</span><br> 
-			<span onclick="location.href='/bbs/notice.jsp'">FAQ</span>
+			<span onclick="location.href='/bbs/list.jsp'">Q&A</span><br> <span
+				onclick="location.href='/bbs/notice.jsp'">FAQ</span>
 		</div>
 
 		<main id="main" class="dFlex">
 
+
+			<!-- 실제 작업 영역 시작 -->
 			<div id="contents" class="bbsWrite">
 
-				<h2>상세보기</h2>
+				<h2>문의글 수정</h2>
 				<hr>
-
-				<form name="modifyFrm" action="modifyProc.jsp"
-						method="get" id="modifyFrm">
-						
+				<form action="modifyProc.jsp" enctype="multipart/form-data"
+					method="post" id="writeFrm">
 					<table>
 						<tbody>
 							<tr>
 								<th>문의유형</th>
-								<td><%=txtType %></td>
+								<td><select name="txtType">
+										<option>선택</option>
+										<option value="예약문의">예약문의</option>
+										<option value="기타">기타</option>
+								</select></td>
 							</tr>
 
 							<tr>
 								<th>이름</th>
-								<td><%=uName %></td>
+								<td><input type="text" name="uName" maxlength="50"
+									id="uName"></td>
 							</tr>
 
 							<tr>
 								<th>제목</th>
-								<td><%=subject %></td>
+								<td><input type="text" name="subject" maxlength="50"
+									id="subject"></td>
 							</tr>
 
 							<tr>
 								<th>내용</th>
-								<td><%=content %></td>
+								<td><textarea name="content" id="content" cols="60"
+										wrap="hard"></textarea></td>
 							</tr>
 							<tr>
 								<th>첨부파일</th>
-								<td><%=systemFileName %></td>
+								<td><span class="spanFile"> <input type="file"
+										name="fileName" id="fileName">
+								</span></td>
 							</tr>
-							
 						</tbody>
 					</table>
+
+					<div id="btn">
+						<button type="submit" id="regBtn">수정</button>
+						<button type="button" id="regBtn"
+							onclick="location.href='/bbs/list.jsp'">취소</button>
+					</div>
 				</form>
-				
-				<div id="btn">
-					<button id="regBtn" onclick="location.href='/bbs/write.jsp'">수정</button>
-					<button id="regBtn" class="delBtn" value="<%=num%>"
-					onclick="location.href='/bbs/deleteProc.jsp'">삭제</button>
-					<button id="regBtn" onclick="location.href='/bbs/list.jsp'">목록</button>
-				</div>
-				
+
 			</div>
+
 		</main>
 
 	</div>
-	<!-- #wrap -->
+	<!-- div#wrap -->
+
+<div id="footerWrap">
+	
+	       <%@ include file="/common/footer.jsp"%>
+	    </div>
+		<!-- div#footerWrap -->
 
 </body>
 </html>

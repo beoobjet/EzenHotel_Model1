@@ -5,6 +5,21 @@ public class ReserveRoomInfo {
 	private int num;
 	private String hCode;
 	private String rCode;
+	
+	public String gethName() {
+		return hName;
+	}
+	public void sethName(String hName) {
+		this.hName = hName;
+	}
+	public String getrName() {
+		return rName;
+	}
+	public void setrName(String rName) {
+		this.rName = rName;
+	}
+	private String hName;
+	private String rName;
 	private String uId;
 	private String resev_start;
 	private String resev_end;
@@ -12,6 +27,14 @@ public class ReserveRoomInfo {
 	private int resev_method;
 	private String resev_date;
 	
+	private int dayOfNights;
+	
+	public int getDayOfNights() {
+		return dayOfNights;
+	}
+	public void setDayOfNights(int dayOfNights) {
+		this.dayOfNights = dayOfNights;
+	}
 	public int getNum() {
 		return num;
 	}

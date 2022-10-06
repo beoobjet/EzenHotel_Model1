@@ -2,13 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="pack_BBS.BoardBean, java.util.Vector"%>
 <jsp:useBean id="bMgr" class="pack_BBS.BoardMgr" />
+<%
+String uId_Session = (String)session.getAttribute("uId_Session"); 
+%>
 
 <%
 request.setCharacterEncoding("UTF-8");
 int num = Integer.parseInt(request.getParameter("num"));
 Vector<BoardBean> vList =  bMgr.mtd_read(num);
 
-String uId_Session = (String)session.getAttribute("uId_Session"); 
+
 %>
 
 
@@ -24,17 +27,14 @@ String uId_Session = (String)session.getAttribute("uId_Session");
 <script src="/script/script.js"></script>
 </head>
 <body>
-	<header id="header" onclick="location.href='/bbs/write.jsp'">
-		<img src="/images/header_img.png" width="100%" alt="예약이미지">
-	</header>
-	<!-- header#header -->
+	<%@ include file="/common/header.jsp"%>
 
 	<div id="wrap" class="dFlex">
 		<div id="Menu">
 			<h2>고객센터</h2>
 			<hr>
-			<span onclick="location.href='/bbs/list.jsp'">Q&A</span><br> 
-			<span onclick="location.href='/bbs/notice.jsp'">FAQ</span>
+			<span onclick="location.href='/bbs/list.jsp'">Q&A</span><br> <span
+				onclick="location.href='/bbs/notice.jsp'">FAQ</span>
 		</div>
 
 		<main id="main" class="dFlex">
@@ -74,15 +74,16 @@ String uId_Session = (String)session.getAttribute("uId_Session");
 								<th>첨부파일</th>
 								<td><%=objBean.getSystemFileName() %></td>
 							</tr>
-							
+
 						</tbody>
 					</table>
 				</form>
-				
+
 				<div id="btn">
-					<button id="regBtn" onclick="location.href='/bbs/write.jsp'">수정</button>
+					<button  class="chaBtn" value="<%=num%>"
+						onclick="location.href='/bbs/modify.jsp'">수정</button>
 					<button id="regBtn" class="delBtn" value="<%=num%>"
-					onclick="location.href='/bbs/deleteProc.jsp'">삭제</button>
+						onclick="location.href='/bbs/deleteProc.jsp'">삭제</button>
 					<button id="regBtn" onclick="location.href='/bbs/list.jsp'">목록</button>
 				</div>
 				<% } %>
@@ -91,6 +92,10 @@ String uId_Session = (String)session.getAttribute("uId_Session");
 
 	</div>
 	<!-- #wrap -->
-
+    <div id="footerWrap">
+	
+	       <%@ include file="/common/footer.jsp"%>
+	    </div>
+		<!-- div#footerWrap -->
 </body>
 </html>

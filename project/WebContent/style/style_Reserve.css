@@ -1,13 +1,27 @@
 @charset "UTF-8";
 @import url("/style/style_Reset.css");
 
+/*예약 화면 공통*/
+
+main#main {
+	width: 80%;
+	margin: 10px auto 20px;
+}
+
+main#main table caption {
+	font-size: 13px;
+	text-align: right;
+	margin: 8px;
+}
+
+
 
 /* ///////////////// reserve.jsp 시작 /////////////////// */
 
 /* ====== 호텔 메뉴 선택 Area ====== */
 main#main>h1{
 	width: 80%;
-	text-align: center;
+	padding: 30px;
 	margin: 40px auto 20px;
 }
 
@@ -117,13 +131,19 @@ table#calResvArea th {
 }
 
 table#calResvArea th.leftTxt {
+	width: 180px;
 	text-align : left;
-	color: #333;
 	background-color : #f8f5f0;
+}
+
+table#calResvArea span{
+	padding: 10px;
+	color: #333;
 }
 
 table#calResvArea td {
 	border: 1px solid #f1ece1;
+	color: #333;
 }
 
 table#calResvArea td button.resvBtn {
@@ -167,11 +187,6 @@ main#main table#resvHOrRDet {
 	margin-top: 20px;
 }
 
-main#main table#resvHOrRDet caption {
-	font-size: 13px;
-	text-align: right;
-	margin: 8px;
-}
 
 main#main table#resvHOrRDet th {
 	padding: 15px 20px;
@@ -183,6 +198,10 @@ main#main table#resvHOrRDet th {
 main#main table#resvHOrRDet td {
 	padding: 15px 20px;
 	border: 1px solid #f1ece1;
+}
+
+main#main table#resvHOrRDet td span#HorR{
+	color: #333;
 }
 
 main#main table#resvHOrRDet input {
@@ -269,6 +288,160 @@ main#main button#resvConfirmBtn:hover {
 
 
 
+/*////////////// 모달 레이어 팝업 시작 //////////////*/
+.contentParts .bbsContents table#bbsGalleryTBL td:hover img{
+	opacity : 0.7;
+}
+
+div#modalBG{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.6);
+	display: none; 
+	
+	position: fixed;
+	top:0;
+	left : 0;
+	
+	z-index: 2;
+}
+
+div#modalBG>div#modalLayer{
+	width: 1000px;
+	height: 500px;
+	
+	padding: 30px;
+	border: 1px solid #000;
+	background-color: #fff;
+	
+	position: absolute;
+	top: 50%;
+	left:50%;
+	transform : translate(-50%, -50%);
+	
+}
+
+div#modalBG>div#modalLayer div#imgArea{
+	/* width: 800px; */
+	margin: 0 auto;
+	
+	overflow: hidden;
+}
+
+div#modalBG span#modalCloseBtn{
+	width: 60px;
+	height: 60px;
+	color: rgba(255,255,255,0.7);
+	font-size: 50px;
+	font-weight: bold;
+	line-height: 46px;
+	text-align: center;
+	/* border: 1px solid rgba(0,0,0,0.7); */
+	border-radius : 50%;
+	
+	cursor: pointer;
+	display: inline-block;
+	
+	position: absolute;
+	right: -100px;
+	top: -100px;
+	
+	transition : all .7s;
+	user-select : none;
+}
+
+div#modalBG span#modalCloseBtn:hover{
+	color:rgba(255,255,255,0.85);
+	/* border: 1px solid rgba(0,0,0,0.7); */
+	background-color:rgba(0,0,0,0.7);
+}
+
+div#modalBG>div#modalLayer h3#artSubject,
+div#modalBG>div#modalLayer p#artistInfoartistInfo {
+	margin: 6px;
+}
+
+
+/*////////////// 모달 레이어 팝업 끝 //////////////*/
+
+
+
+/* ///////////////// reserveConfirm.jsp 시작 /////////////////// */
+main#main div#divArea {
+	width: 80%;
+	margin: 0 auto;
+}
+main#main div#ResvTermBtnArea{
+	width: 500px;
+	height: 60px;
+	margin: -20px 0 20px;
+}
+#main #ResvTermBtnArea div#pastTermBtn,
+#main #ResvTermBtnArea div#nowTermBtn {
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 37px;
+	color: #9e7d3a;
+	border: 1px solid #9e7d3a;
+	background-color: #fff;
+	margin: 10px;
+	display : inline-block;
+	
+	cursor: pointer;
+	flex: 1;
+}
+
+#main #ResvTermBtnArea div#nowTermBtn {
+	background-color: #ca7a49;
+	color: #eee;
+}
+
+main#main h2 {
+	padding: 0 0 15px 20px;
+}
+
+main#main hr{
+	border: 1px solid #ddd;
+	margin: 20px 0;
+}
+
+#main div#noResev {
+	padding: 80px;
+	height: 600px;
+}
+
+#main div.myResvList>div.resvImgArea {
+	width: 350px;
+}
+
+#main div.myResvList>div.resvImgArea>img {
+	cursor: pointer;
+}
+
+#main div.myResvList>div.myResvInfo {
+	margin-left: 30px;
+}
+
+#main div.myResvList>div.myResvInfo table{
+	width: 400px;
+	border-collapse: collapse;
+	transform: translateY(-16px);
+}
+#main div.myResvList>div.myResvInfo th{
+	height: 30px;
+	text-align: left;
+	border-bottom: 1px solid #eee;
+}
+
+#main div.myResvList>div.myResvInfo th.thLine{
+	height: 55px;
+}
+
+#main div.myResvList>div.myResvInfo td {
+	width: 300px;
+	border-bottom: 1px solid #eee;
+}
 
 
 /* ///////////// 시작 /////////////// */

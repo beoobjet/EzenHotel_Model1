@@ -165,6 +165,7 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 		
 		<br>
 		<table id="calResvArea" border="0" cellspacing="1" cellpadding="1" bgcolor="#FFFFFF">
+			<caption>회원정보 <b><%= uId_Session %></b> 님</caption>
 			<thead>
 				<tr bgcolor="#CECECE">
 					<th width='180px'>객실구분</th>

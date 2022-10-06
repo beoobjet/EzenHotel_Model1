@@ -9,7 +9,7 @@ header{
 }
 
 div#wrap {
-    width: 100%;
+    width: 1230px;
     ustify-content: center;
     padding: 0 65px;
     margin: 2px auto;
@@ -26,7 +26,7 @@ div#wrap {
 }
 
 #Menu>h2{
-	
+
 	font-family: gothamB;
 }
 #Menu>hr{
@@ -44,6 +44,7 @@ div#wrap {
 
 #Menu>span:hover{
 	background-color: #caac7d;
+	cursor: pointer;
 }
 
 main{
@@ -98,7 +99,20 @@ main>#contents>form>table>tbody>tr>td>input,select,textarea{
     text-align: center;
 }
 
-button.regBtn{
+#btn>button{
+	width: 99px;
+    height: 44px;
+    color:#fff;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    border: none;
+    background-color: #856f56;
+    margin-top: 30px;
+    margin-bottom: 84px;
+}
+
+button#regBtn{
 	width: 99px;
     height: 44px;
     color:#fff;
@@ -111,12 +125,16 @@ button.regBtn{
 }
 
 /*////////////// 공지사항 시작 ///////////////// */
+#tabBtn{
+	width: 730px;
+	border-bottom: 1px solid  #eceae1;
+}
 #tabBtn>button {
-	width: 120px;
-    font-size: 13px;
+	width: 140px;
+    font-size: 14px;
 	font-family: gothamB;
     font-weight: bold;
-    padding: 8px 16px;
+    padding: 9px 20px;
     border: none;
     border: #eceae1 solid 1px;
 
@@ -139,41 +157,75 @@ button.regBtn{
 #tabBtn>button:nth-child(4) {
     left: -19px;
 }
-table.multiTB{
-	width: 730px;
-	border-collapse: collapse;
+div.multiTB{
+	width: 800px;
+	height: 500px;
 }
-table.multiTB{
-	margin-top: 20px;
+
+div.multiTB>ul>li#faqHr{
+	width: 800px;
+	border-top: 2px solid #eceae1;
+	background: #faf9f4;
+    font-size: 14px;
+	font-family: gothamB;
 }
-table.multiTB>tbody>tr>td{
-	width: 30px;
-	border-bottom: #eceae1 solid 1px;
-	line-height: 48px;
+div.multiTB>ul>li#faqHr>span{
+	font-family: gothamB;
+}
+
+div.multiTB>ul>#faqHr>#faqHrType{
+	width: 113px;
+	text-align: center;
+	font-family: gothamB;
+}
+div.multiTB>ul>#faqHr>#faqHrType::after{
+	content: "|";
+	color:#666;
+	float: right;
+ 	display: block;
+}
+div.multiTB>ul>#faqHr>#faqHrTitle{
+	flex:1;
+	text-align: center;
+	font-family: gothamB;
+}
+
+div.multiTB>ul>li{
+	width: 800px;
+	line-height: 34px;
+	border-bottom: 1px solid #eceae1;
+}
+
+div.multiTB>ul>li>span.faqType{
+	padding: 10px 44px;
 	font-size: 15px;
 	font-family: gothamB;
-	}
-table.multiTB>tbody>tr:nth-child(even){
-	width: 30px;
+}
+
+div.multiTB>ul>li>span.faqTitle{
+	width: 600px;
+	padding: 10px;
+	line-height: 50px;
+	font-size: 15px;
+	font-family: gothamB;
+	margin-right: 350px;
+}
+div.multiTB>ul>li>ul>li.reply{
+	width: 800px;
+	padding: 10px;
 	background-color: #f9f9f9;
-	line-height: 48px;
 	font-size: 13px;
 	font-family: gothamB;
-	display:none; 
-	}	
-	
-table.multiTB>tbody>tr>td:first-child{
 	text-align: center;
-	width: 12px;
-	padding-left: 6px;
+	border-top: #eceae1 solid 1px;
 }
 
-table.multiTB>tbody>tr>td.btnIco{
-	text-align: right;
+.hide{
+	display:none;
 }
 
-table.multiTB>tbody>tr>td>img{
-	width: 22px;
+div.multiTB>ul>li>img{
+	height: 15px;
 	vertical-align: middle;
 	cursor: pointer;
 }

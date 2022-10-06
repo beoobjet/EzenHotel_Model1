@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+String uId_Session = (String)session.getAttribute("uId_Session"); 
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +16,9 @@
 </head>
 
 <body>
-	<header id="header" onclick="location.href='/bbs/write.jsp'">
-		<img src="/images/header_img.png" width="100%" alt="예약이미">
-	</header>
-	<!-- header#header -->
+
+		<%@ include file="/common/header.jsp"%>
+
 	
     <div id="wrap" class="dFlex">
     	<div id="Menu">
@@ -33,98 +35,90 @@
 				
 				<h2>FAQ</h2>
 				<hr>
-				
-					<div id="tabBtn">
-		                <button type="button" data-link="all">전체</button>
-		                <button type="button" data-link="room">객실</button>
-		                <button type="button" data-link="reserve">예약</button>
-		                <button type="button" data-link="etc">기타</button>
-	           		 </div>
+				 
+					<div class="multiTB all">
+						<ul>
+							<li id="faqHr" class="dFlex">
+								<span id="faqHrType">구분</span>
+								<span id="faqHrTitle">제목</span>
+							</li>
+						</ul>
 					
-					<table class="multiTB">
-						<tbody>
-							<tr class="room">
-	                            <td>객실</td>
-	                            <td>객실에서 인터넷을 사용할 수 있을까요?</td>
-	                            <td class="btnIco"><img src="/images/ico_down.png" width="24px"></td>
-	                        </tr>
-	                        <tr class="reply">
-	                      		<td colspan="3">답변</td>
-	                        </tr>
+						<ul>
+							<li class="menu" id="room">
+	                            <span class="faqType">객실</span>
+	                            <span class="faqTitle">객실에서 인터넷을 사용할 수 있을까요?</span>
+	                            <img src="/images/ico_down.png" art="아이콘이미지">
+	                            <ul class="hide">
+	                            	<li class="reply">답변</li>
+	                            </ul>
+	                        </li>
 	                        
-	                        <tr class="room">
-	                        	<td>객실</td>
-	                            <td>체크인과 체크아웃 시간은 언제입니까?</td>
-	                            <td class="btnIco"><img src="/images/ico_down.png" width="24px"></td>
-	                        </tr>
-	                        <tr class="reply">
-	                      		<td colspan="3">답변</td>
-	                        </tr>
-	                       
+	                        <li class="menu room">
+	                            <span class="faqType">객실</span>
+	                            <span class="faqTitle">체크인과 체크 아웃 시간은 언제입니까?</span>
+	                            <img src="/images/ico_down.png" art="아이콘이미지">
+	                            <ul class="hide">
+	                            	<li class="reply">답변</li>
+	                            </ul>
+	                        </li>
 	                        
-	                        <tr class="room">
-	                            <td>객실</td>
-	                            <td>2020.03.14</td>
-	                            <td class="btnIco"><img src="/images/ico_down.png" width="24px"></td>
-	                        </tr>
-	                       <tr class="reply">
-	                      		<td colspan="3">답변</td>
-	                        </tr>
+	                         <li class="menu reserve">
+	                            <span class="faqType" >예약</span>
+	                            <span class="faqTitle">체크인 전에 부대시설 이용 가능할까요?</span>
+	                            <img src="/images/ico_down.png" art="아이콘이미지">
+	                            <ul class="hide">
+	                            	<li class="reply">답변</li>
+	                            </ul>
+	                        </li>
 	                        
-	                       
-	                        <tr class="res">
-	                            <td>예약</td>
-	                            <td>객실 고객이 이용 가능한 부대시설은 어떤 것이 있나요?</td>
-	                            <td class="btnIco"><img src="/images/ico_down.png" width="24px"></td>
-	                        </tr>	
-	                        <tr class="reply">
-	                      		<td colspan="3">답변</td>
-	                        </tr>
+	                        <li class="menu reserve">
+	                            <span class="faqType">예약</span>
+	                            <span class="faqTitle">체크인 전에 부대시설 이용 가능할까요?</span>
+	                            <img src="/images/ico_down.png" art="아이콘이미지">
+	                            <ul class="hide">
+	                            	<li class="reply">답변</li>
+	                            </ul>
+	                        </li>
 	                        
 	                        
-	                        <tr class="res">
-	                            <td>예약</td>
-	                            <td>커넥팅 룸이 있나요?</td>
-	                            <td class="btnIco"><img src="/images/ico_down.png" width="24px"></td>
-	                        </tr>
-	                        <tr class="reply">
-	                      		<td colspan="3">답변</td>
-	                        </tr>
+	                       <li class="menu etc">
+	                            <span class="faqType">기타</span>
+	                            <span class="faqTitle">체크인 전에 부대시설 이용 가능할까요?</span>
+	                            <img src="/images/ico_down.png" art="아이콘이미지">
+	                            <ul class="hide">
+	                            	<li class="reply">답변</li>
+	                            </ul>
+	                        </li>
 	                        
-	                        <tr class="etc">
-	                            <td>기타</td>
-	                            <td>주차장 이용은 어떻게 할 수 있나요? (호텔 투숙객 전용 층이 있나요?)</td>
-	                            <td class="btnIco"><img src="/images/ico_down.png" width="24px"></td>
-	                        </tr>
-	                        <tr class="reply">
-	                      		<td colspan="3">답변</td>
-	                        </tr>
+	                        <li class="menu etc">
+	                            <span class="faqType">기타</span>
+	                            <span class="faqTitle">체크인 전에 부대시설 이용 가능할까요?</span>
+	                            <img src="/images/ico_down.png" art="아이콘이미지">
+	                            <ul class="hide">
+	                            	<li class="reply">답변</li>
+	                            </ul>
+	                        </li>
 	                        
-	                        	
-	                        <tr class="etc">
-	                            <td>기타</td>
-	                            <td>지하철을 이용하는 경우 어떻게 찾아가나요?</td>
-	                            <td class="btnIco"><img src="/images/ico_down.png" width="24px"></td>
-	                        </tr>	
-	                        <tr class="reply">
-	                      		<td colspan="3">답변</td>
-	                        </tr>
+	                        <li class="menu etc">
+	                            <span class="faqType">기타</span>
+	                            <span class="faqTitle">체크인 전에 부대시설 이용 가능할까요?</span>
+	                            <img src="/images/ico_down.png" art="아이콘이미지">
+	                            <ul class="hide">
+	                            	<li class="reply">답변</li>
+	                            </ul>
+	                        </li>
 	                        
-	                        <tr class="etc">
-	                            <td>기타</td>
-	                            <td>코로나 방역을 위해 어떤 조치를 취하고 있나요?</td>
-	                            <td class="btnIco"><img src="/images/ico_down.png" width="24px"></td>
-	                        </tr>
-	                        <tr class="reply">
-	                      		<td colspan="3">답변</td>
-	                        </tr>
-	                        	
-	                        	
-						</tbody>
-					</table>
+	                    </ul>
+					</div>
 				
 			</div>
 		</main>
 	</div>
+	<div id="footerWrap">
+	
+	       <%@ include file="/common/footer.jsp"%>
+	    </div>
+		<!-- div#footerWrap -->
 </body>
 </html>

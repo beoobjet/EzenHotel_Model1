@@ -181,10 +181,12 @@ public class ReserveMgr {
 		
 		boolean resvFlag = false;
 		String resev_end = "";
+		int resSuccessCnt = 0;
 		
 		try {
 			objConn = objPool.getConnection();
 			
+			/*// 연박 시 첫박만 데이터 입력(체크아웃 날짜만 입력되고 연박에 대한 관련 데이터 입력안됨)
 			String sql = "insert into reserveInfo(hCode, rCode, uId, resev_start, resev_end, resev_people, resev_method) "; 
 					sql += "values(?, ?, ?, ?, DATE_ADD(?, INTERVAL ? DAY), ?, ?)";
 					
@@ -199,19 +201,36 @@ public class ReserveMgr {
 			objPstmt.setInt(7, resev_people);
 			objPstmt.setInt(8, resev_method);
 			
-			objPstmt.executeUpdate();
-			/*
-			objPstmt.setString(1, rBean.gethCode());
-			objPstmt.setString(2, rBean.getrCode());
-			objPstmt.setString(3, rBean.getuId());
-			objPstmt.setString(4, rBean.getResev_start());
-			objPstmt.setString(4, rBean.getResev_start());
-			objPstmt.setString(5, dayOfNights); 
-			objPstmt.setInt(6, rBean.getResev_people());
-			objPstmt.setInt(7, rBean.getResev_method());
 			*/
 			
-			System.out.println("sql : "+sql);
+			for(int i=0; i<dayOfNights; i++) {
+				String sql = "insert into reserveInfo(hCode, rCode, uId, resev_start, resev_end, resev_people, resev_method, dayOfNights) "; 
+				sql += "values(?, ?, ?, DATE_ADD(?, INTERVAL ? DAY), DATE_ADD(?, INTERVAL ? DAY), ?, ?, ?)";
+			
+				objPstmt = objConn.prepareStatement(sql);
+			
+				objPstmt.setString(1, hCode);
+				objPstmt.setString(2, rCode);
+				objPstmt.setString(3, uId);
+				objPstmt.setString(4, resev_start);
+				objPstmt.setInt(5, i);
+				objPstmt.setString(6, resev_start);
+				objPstmt.setInt(7, (i+1));
+				objPstmt.setInt(8, resev_people);
+				objPstmt.setInt(9, resev_method);
+				objPstmt.setInt(10, dayOfNights);
+				
+				int resCnt = objPstmt.executeUpdate();
+				
+				if(resCnt == 1) {
+					resSuccessCnt++;
+				}
+			}
+			
+			// 연박만큼 DB값 입력이 됬는지 확인
+			if(resSuccessCnt == dayOfNights) {
+				resvFlag = true;
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -220,6 +239,67 @@ public class ReserveMgr {
 		}
 		
 		return resvFlag;
+	}
+	
+	// 나의 예약 현황 리스트 보기
+	public List<ReserveRoomInfo> mtd_myResvList(String uId_Session, String chkBtn){
+		List<ReserveRoomInfo> objResvInfoList = null;
+		ReserveRoomInfo objResvInfo = null;
+		
+		try {
+			objConn = objPool.getConnection();
+			objStmt = objConn.createStatement();
+			
+			String sql = "";
+			
+			if(chkBtn.equals("now")) {
+				sql = "select num, i.hCode as hCode, hName, i.rCode as rCode, rName, uId, resev_people, resev_method, date_format(resev_start, '%Y-%m-%d') as resev_start, date_format(DATE_ADD(i.resev_start, INTERVAL i.dayOfNights DAY), '%Y-%m-%d') as resev_end, resev_date, dayOfNights"
+						+ " from reserveInfo i "
+						+ " join roomInfo r on r.rCode = i.rCode"
+						+ " join lodgeInfo h on i.hCode = h.hCode"
+						+ " where uId='"+uId_Session+"' and resev_start >= DATE(NOW())"
+						+ " group by uId, resev_date, rCode "
+						+ " order by resev_start asc;";
+			}else {
+				sql = "select num, i.hCode as hCode, hName, i.rCode as rCode, rName, uId, resev_people, resev_method, date_format(resev_start, '%Y-%m-%d') as resev_start, date_format(DATE_ADD(i.resev_start, INTERVAL i.dayOfNights DAY), '%Y-%m-%d') as resev_end, resev_date, dayOfNights"
+						+ " from reserveInfo i "
+						+ " join roomInfo r on r.rCode = i.rCode"
+						+ " join lodgeInfo h on i.hCode = h.hCode"
+						+ " where uId='"+uId_Session+"' and resev_start < DATE(NOW())"
+						+ " group by uId, resev_date, rCode "
+						+ " order by resev_start desc;";
+			}
+			
+			objRS = objStmt.executeQuery(sql);
+			
+			objResvInfoList = new Vector<ReserveRoomInfo>();
+			while(objRS.next()) {
+				objResvInfo = new ReserveRoomInfo();
+				
+				objResvInfo.setNum(objRS.getInt("num"));
+				objResvInfo.sethCode(objRS.getString("hCode")); 
+				objResvInfo.sethName(objRS.getString("hName")); 
+				objResvInfo.setrCode(objRS.getString("rCode")); 
+				objResvInfo.setrName(objRS.getString("rName")); 
+				objResvInfo.setuId(objRS.getString("uId")); 
+				objResvInfo.setResev_people(objRS.getInt("resev_people"));
+				objResvInfo.setResev_method(objRS.getInt("resev_method"));
+				objResvInfo.setResev_start(objRS.getString("resev_start")); 
+				objResvInfo.setResev_end(objRS.getString("resev_end")); 
+				objResvInfo.setResev_date(objRS.getString("resev_date")); 
+				objResvInfo.setDayOfNights(objRS.getInt("dayOfNights"));
+				
+				objResvInfoList.add(objResvInfo);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			objPool.freeConnection(objConn, objStmt);
+		}
+		
+		return objResvInfoList;
+		
 	}
 	
 

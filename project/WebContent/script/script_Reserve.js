@@ -15,6 +15,16 @@ function pageLoading(){
 		liHotel.style.backgroundColor="#896825";
 		liChild.style.color = "#ffffff";
 		
+	} else if(url.includes("reserveConfirm.jsp")){
+		let clsName = url.split("?hCode=").reverse()[0];
+		clsName = clsName.split("&")[0];
+		
+		let liHotel = document.getElementById(clsName);
+		let liChild = liHotel.firstChild;
+		
+		liHotel.style.backgroundColor="#896825";
+		liChild.style.color = "#ffffff";
+		
 	}
 }
 
@@ -47,7 +57,7 @@ function pageLoadChkHotel(){
 
 $(function(){
 
-	/* 달력에서 '예약하기' 버튼 클릭 시 예약 페이지로 이동 */
+	/* reserve.jsp - 달력에서 '예약하기' 버튼 클릭 시 예약 페이지로 이동 */
 	$("button.resvBtn").click(function(){
 		let loginID = $("#loginID").val();
 		console.log(loginID);
@@ -63,7 +73,7 @@ $(function(){
 		}
 	});
 	
-	// reserveInsert.jsp 드롭박스의 호텔 변경 시마다 객실 정보 변경 함수 
+	// reserveInsert.jsp - 드롭박스의 호텔 변경 시마다 객실 정보 변경 함수 
 	$("select#hotelName").change(function(){
 		let hCode = $(this).val();
 		console.log(hCode);
@@ -103,7 +113,7 @@ $(function(){
 		
 	});
 	
-	// 객실 선택 한가지만 가능하도록(체크박스 다중 선택 불가)
+	// reserveInsert.jsp - 객실 선택 한가지만 가능하도록(체크박스 다중 선택 불가)
 	$("input.chkRCode").click(function(){
 		if($(this).prop("checked")){
 			$("input.chkRCode").prop("checked", false);
@@ -111,7 +121,7 @@ $(function(){
 		}
 	});
 	
-	// '예약하기' 버튼 submit 실행 및 유효성 검사 진행
+	// reserveInsert.jsp - '예약하기' 버튼 submit 실행 및 유효성 검사 진행
 	$("button#resvConfirmBtn").click(function(){
 		let phone2 = $("#phone2").val();
 		let phone3 = $("#phone3").val();
@@ -135,7 +145,7 @@ $(function(){
 	});
 	
 	
-	//input 핸드폰 번호 숫자만 입력
+	//reserveInsert.jsp - input 핸드폰 번호 숫자만 입력
     $(".phone").on("keyup", function(event) {
         if (event.which && (event.which  > 47 && event.which  < 58 || event.which == 8)) {
             
@@ -144,11 +154,105 @@ $(function(){
             $(this).val($(this).val().replace(/[^0-9]/g,""));
         }
     });
+
+
+
+	/*모달 슬라이드쇼*/
+	// 현재 두번째 버튼 클릭 시부터 슬라이드가 되지 않음
+	setInterval(fnSlide_fade, 1000);
+	
+	function fnSlide_fade(){
+		$("#imgArea>a:nth-child(1)").fadeOut(1000, function(){
+			$(this).insertAfter("#imgArea>a:nth-child(3)");
+		});
+		$("#imgArea>a:nth-child(2)").fadeIn(1000);
+		
+	}
+
+	/* 모달레이어 팝업 시 */
+	$("div.roomTypeList button.imgViewBtn, div.resvImgArea img").click(function(){
+		console.log("모달");
+		$("img.imgForRoom").remove();
+		
+		$("div#modalBG").show();
+		let btnVal = $(this).nextAll("input.roomImg").attr("value");
+		let roomName = $(this).nextAll("input.roomImgName").attr("value");
+		console.log("객실정보 : "+roomName);
+		console.log("객실코드 : " + btnVal);
+		
+		let imgAttr="";
+		// 이미지 3장씩만 저장되어있음.....
+		for(let i=1; i<=3; i++){
+			imgAttr = "/images/hotelListImg/" + btnVal + "-0" + i + ".jpg";
+			console.log(imgAttr);
+			$("div#imgArea").append("<a href='#'><img class='imgForRoom' src='"+imgAttr+"' alt='test' /></a>");
+		}
+		
+		$("div#modalLayerImg").find("h3#artSubject").text("객실 정보 : "+roomName);
+	});
+	
+	$("span#modalCloseBtn").click(function(){
+		$("div#modalBG").hide();
+	});
+	
+	
+	/* reserveConfirm.jsp 페이지 예약 보기 버튼 url 변경 */
+	$("div#nowTermBtn").click(function(){
+		let chUrl = "/reserve/reserveConfirm.jsp?chkBtn=now";
+		window.location.replace(chUrl);
+	});
+	
+	$("div#pastTermBtn").click(function(){
+		let chUrl = "/reserve/reserveConfirm.jsp?chkBtn=past";
+		window.location.replace(chUrl);
+	});
+	
+	
 	
 	
 });
 
+/* reserveConfirm.jsp 페이지 예약 보기 버튼 표시 */
+function onloadBtnChk(){
+	let url = $(location).attr('href'); 
+	
+	if(url.includes("chkBtn")){
+		let chkBtn = url.split("chkBtn=").reverse()[0];
+	
+		let chkBtnVal = chkBtn;
+		
+		if(chkBtn.includes("&")){
+			chkBtnVal = chkBtn.split("&")[0];			
+		}
+	
+		console.log("url 체크 : "+chkBtnVal);
+		
+		let pastOrNow = document.getElementById("pastOrNow");
+		
+		if(chkBtnVal == "past"){
+			let pastTermBtn = document.getElementById("pastTermBtn");
+			let nowTermBtn = document.getElementById("nowTermBtn");
+		
+			nowTermBtn.style.backgroundColor="#fff";
+			nowTermBtn.style.color = "#9e7d3a";
+			pastTermBtn.style.backgroundColor="#ca7a49";
+			pastTermBtn.style.color = "#ffffff";
+			
+			pastOrNow.value = "past";
+		}else {
+			let nowTermBtn = document.getElementById("nowTermBtn");
+			let pastTermBtn = document.getElementById("pastTermBtn");
+		
+			pastTermBtn.style.backgroundColor="#fff";
+			pastTermBtn.style.color = "#9e7d3a";
+			nowTermBtn.style.backgroundColor="#ca7a49";
+			nowTermBtn.style.color = "#ffffff";
+			
+			pastOrNow.value = "now";
+		}
 
+	}
+}
 
 
 

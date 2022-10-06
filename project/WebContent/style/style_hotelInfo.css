@@ -97,7 +97,7 @@ div#hotelInfoWrap section:not(:nth-child(2)) button:hover {
 div#hotelInfoWrap section>div.inner {
 	width: 1000px;
 	/* 	text-align: center; */
-/* 	border: 1px solid #000; */
+	/* 	border: 1px solid #000; */
 	margin: 0 auto;
 }
 
@@ -111,4 +111,85 @@ div#hotelInfoWrap section>div.inner>div:nth-child(1) {
 
 div#hotelInfoWrap section>div.inner img {
 	width: 450px;
+}
+
+/*/////////////////////////////////////////////////////////////////*/
+/*오시는 길//////////////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////*/
+div#hotelInfoWrap>div#mapContainer {
+	text-align: center;
+	width: 1000px;
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+
+div#hotelInfoWrap>div#mapContainer>ul#directionList>li {
+	padding: 15px 25px;
+	background-color: #d37643;
+	color: #fcf2dc;
+	cursor: pointer;
+}
+
+div#hotelInfoWrap>div#mapContainer>ul#directionList>li:hover {
+	background-color: #744f3b;
+}
+
+div#hotelInfoWrap>div#mapContainer>ul#directionList>li.selectedMap {
+	background-color: #744f3b;
+}
+
+div#hotelInfoWrap>div#mapContainer>ul#directionList {
+	flex-wrap: wrap;
+	width: 1000px;
+	justify-content: center;
+	margin: 0 auto;
+	gap: 5px;
+	margin-bottom: 30px;
+}
+
+div#hotelInfoWrap>div#mapContainer>div.map {
+	width: 1000px;
+	height: 440px;
+	/* 	border: 1px solid #000; */
+	margin: 0 auto;
+}
+
+/*//////////////////////////////////////*/
+/* contact /////////////////////////////*/
+/*//////////////////////////////////////*/
+div#hotelInfoWrap section.contactSection p {
+	font-size: 24px;
+	font-weight: bold;
+	text-align: left;
+	color: #d37643;
+	line-height: 40px;
+}
+
+div#hotelInfoWrap>div#contactInfoContainer {
+	width: 1000px;
+	margin: 0 auto;
+	cursor: default;
+	margin-bottom: 100px;
+}
+
+div#hotelInfoWrap>div#contactInfoContainer table {
+	border-top: 1px solid #ddd;
+	width: 100%;
+	padding: 60px 30px 60px 20px;
+}
+
+div#hotelInfoWrap>div#contactInfoContainer table th {
+	width: 240px;
+	color: #744f3b;
+	font-size: 24px;
+	text-align: left;
+}
+
+div#hotelInfoWrap>div#contactInfoContainer table b {
+	margin-right: 5px;
+	line-height: 20px;
+}
+
+div#hotelInfoWrap>div#contactInfoContainer table td {
+	height: 100px;
 }
